@@ -1,0 +1,48 @@
+{
+  "eslint.autoFixOnSave": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.showUnused": true,
+  "typescript.showDeprecated": true,
+  "go.goplsOptions": {
+	  "gofumpt": true,
+	  "env": {
+		  "GOFLAGS": "--tags=\"test,unit,e2e,it\""
+	  }
+  },
+  "cSpell.userWords": [
+    "Asen",
+    "DNSIP",
+    "Mihaylov",
+    "Nikola",
+    "Prodanov",
+    "Redlock",
+    "SYNCERROR",
+    "Vhost",
+    "Vhosts",
+    "Vmin",
+    "XDNSSL",
+    "amqp",
+    "barzaz",
+    "commitlint",
+    "desync",
+    "dtos",
+    "fenix",
+    "fenixmq",
+    "gonic",
+    "gorm",
+    "healthcheck",
+    "hostbill",
+    "iprodanov",
+    "microservices",
+    "mitev",
+    "nestjs",
+    "prebuild",
+    "rabbitmq",
+    "recard",
+    "streadway",
+    "timestamptz",
+    "typeorm",
+    "varchar",
+    "wbst"
+  ]
+}

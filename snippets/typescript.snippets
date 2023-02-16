@@ -1,0 +1,14 @@
+snippet descr "describe()"
+	describe('${1:description}', () => {
+		${0}
+	});
+snippet it "it('', () => {})"
+	it('${1:description}', () => {
+		${0}
+	});
+snippet ita "it('', async () => {})"
+	it('${1:description}', async () => {
+		${0}
+	});
+snippet mo "(THING as jest.mock).mockImplementationOnce"
+	(${1:function} as jest.Mock).mockImplementationOnce(() => ${0});
