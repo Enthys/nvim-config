@@ -1,4 +1,6 @@
 {
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
   "eslint.autoFixOnSave": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.showUnused": true,
