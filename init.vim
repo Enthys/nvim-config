@@ -6,8 +6,8 @@ set tabstop=4
 set shiftwidth=4
 set nowrap
 set linebreak
-set whichwrap+=>,l
-set whichwrap+=<,h
+" set whichwrap+=>,l
+" set whichwrap+=<,h
 set scrolloff=10
 set noswapfile
 set smartindent
@@ -29,7 +29,7 @@ syntax on
 call plug#begin()
 Plug 'junegunn/vim-easy-align'
 Plug 'APZelos/blamer.nvim'
-Plug 'SirVer/ultisnips' 
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Plug 'nsf/gocode', { 'tag': 'v.20150302', 'rtp': 'vim' }
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -42,7 +42,6 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-tree-docs'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
-Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'preservim/nerdtree'
@@ -58,8 +57,6 @@ Plug 'marko-cerovac/material.nvim'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug 'xiyaowong/nvim-transparent'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'numtostr/BufOnly.nvim', { 'on': 'BufOnly' }
 Plug 'windwp/nvim-autopairs'
 call plug#end()
 
@@ -74,24 +71,24 @@ call plug#end()
 " ---------------------------------------------------------------
 lua require('nvim-autopairs').setup({})
 lua require('nightfox').setup({
-                  \ options = {
-                        \ styles = {
-            \ comments = "italic"
-        \ }
-        \ }
-  \ })
+			\ options = {
+			\ styles = {
+			\ comments = "italic"
+			\ }
+			\ }
+			\ })
 
 lua require('onedark').load({})
 
 lua require('material').setup({
 			\ contrast = {
-		\ terminal = true,
-		\ sidebars = true,
-		\ floating_windows = true,
-		\ cursor_line = true,
-		\ non_current_windows = true,
-	  \ }
-  \ })
+			\ terminal = true,
+			\ sidebars = true,
+			\ floating_windows = true,
+			\ cursor_line = true,
+			\ non_current_windows = true,
+			\ }
+			\ })
 let g:material_style = "deep ocean"
 
 colorscheme onedark
@@ -100,26 +97,26 @@ colorscheme onedark
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
+			\ coc#pum#visible() ? coc#pum#next(1):
+			\ CheckBackspace() ? "\<Tab>" :
+			\ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+	inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+	inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -148,11 +145,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+	autocmd!
+	" Setup formatexpr specified filetype(s).
+	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+	" Update signature help on jump placeholder.
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -181,12 +178,12 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+	inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+	inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+	vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -241,16 +238,16 @@ nmap <silent> <C-t>v :TestVisit<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+	if (has("nvim"))
+		"For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+		let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	endif
+	"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+	"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+	" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+	if (has("termguicolors"))
+		set termguicolors
+	endif
 endif
 
 
@@ -269,10 +266,10 @@ nmap gD :CocDiagnostics<cr>
 
 lua vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", {noremap = true})
 
-lua require('workspaces').setup({ 
-	\ hooks = { open = { "NERDTree" } }, 
-	\ global_cd = true 
-\ })
+lua require('workspaces').setup({
+			\ hooks = { open = { "NERDTree" } }, 
+			\ global_cd = true 
+			\ })
 
 nmap <leader>gb :BlamerToggle<cr>
 let g:blamer_delay = 100
@@ -300,10 +297,10 @@ highlight Comment guifg=#00ff00
 
 
 command! -bang -nargs=? -complete=dir HFiles
-  \ call fzf#vim#files(<q-args>, {'source': 'find . \( -not -path "./.git/*" ' .
-    \   '-and \( -path "./.*" -or -path "./.*/**" \) ' .
-    \   '-and \( -type f -or -type l \) ' .
-    \ '\) -print | sed "s:^..::"'}, <bang>0)
+			\ call fzf#vim#files(<q-args>, {'source': 'find . \( -not -path "./.git/*" ' .
+			\   '-and \( -path "./.*" -or -path "./.*/**" \) ' .
+			\   '-and \( -type f -or -type l \) ' .
+			\ '\) -print | sed "s:^..::"'}, <bang>0)
 
 map <leader>zh :HFiles<CR>
 
@@ -315,10 +312,10 @@ let @x = '0xxx'
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 command! -bang -nargs=? -complete=dir HFiles
-  \ call fzf#vim#files(<q-args>, {'source': 'find . \( -not -path "./.git/*" ' .
-    \   '-and \( -path "./.*" -or -path "./.*/**" \) ' .
-    \   '-and \( -type f -or -type l \) ' .
-    \ '\) -print | sed "s:^..::"'}, <bang>0)
+			\ call fzf#vim#files(<q-args>, {'source': 'find . \( -not -path "./.git/*" ' .
+			\   '-and \( -path "./.*" -or -path "./.*/**" \) ' .
+			\   '-and \( -type f -or -type l \) ' .
+			\ '\) -print | sed "s:^..::"'}, <bang>0)
 
 map <leader>zh :HFiles<CR>
 
@@ -337,3 +334,16 @@ nmap <silent> K :call CocActionAsync('doHover')<CR>
 map <leader>dt :CocCommand docthis.documentThis<CR>
 
 lua require("transparent").setup({ enable = true })
+
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
+
+" Snippet Configuration
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"

@@ -12,3 +12,11 @@ snippet ita "it('', async () => {})"
 	});
 snippet mo "(THING as jest.mock).mockImplementationOnce"
 	(${1:function} as jest.Mock).mockImplementationOnce(() => ${0});
+snippet ntopic "New topic class for the @fenix/nestjs-topics package"
+	export class ${1:TopicClass} extends Topic {
+	  public readonly message: ${1:TopicClass}Message;
+	  public readonly exchange: string = ${2:ExchangeName};
+	  public readonly routingKey: string = '${3:routing_key}';
+	  public readonly queue: string = '${4:queue_name}';
+	  public readonly exchangeType: ExchangeType.${5:Topic};
+	}${0}

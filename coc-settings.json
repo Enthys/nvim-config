@@ -1,6 +1,7 @@
 {
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.refreshOnInsertMode": true,
   "eslint.autoFixOnSave": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.showUnused": true,
@@ -13,6 +14,7 @@
   },
   "cSpell.userWords": [
     "Asen",
+    "Certbot",
     "DNSIP",
     "Mihaylov",
     "Nikola",
@@ -28,6 +30,7 @@
     "commitlint",
     "desync",
     "dtos",
+    "eqeqeq",
     "fenix",
     "fenixmq",
     "gonic",
@@ -38,6 +41,7 @@
     "microservices",
     "mitev",
     "nestjs",
+    "noout",
     "prebuild",
     "rabbitmq",
     "recard",
