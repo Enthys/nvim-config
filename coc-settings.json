@@ -16,6 +16,7 @@
     "Asen",
     "Certbot",
     "DNSIP",
+    "Enthys",
     "Mihaylov",
     "Nikola",
     "POWERDNS",
@@ -31,6 +32,7 @@
     "commitlint",
     "desync",
     "dtos",
+    "epub",
     "eqeqeq",
     "fenix",
     "fenixmq",
@@ -52,5 +54,17 @@
     "typeorm",
     "varchar",
     "wbst"
-  ]
+  ],
+  "snippets.ultisnips.pythonPrompt": false,
+  "languageserver": {
+	  "golang": {
+		  "command": "gopls",
+		  "rootPatterns": ["go.mod", ".git/"],
+		  "disableWorkspaceFolders": true,
+		  "filetypes": ["go"],
+		  "initializationOptions": {
+			  "completeUnimported": true
+		  },
+	  }
+  },
 }

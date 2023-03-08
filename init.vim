@@ -6,8 +6,8 @@ set tabstop=4
 set shiftwidth=4
 set nowrap
 set linebreak
-" set whichwrap+=>,l
-" set whichwrap+=<,h
+" set whichwrap+=>,l " Move to next line if on end of line
+" set whichwrap+=<,h " Move to previous line if at beggining of line
 set scrolloff=10
 set noswapfile
 set smartindent
@@ -15,7 +15,6 @@ set colorcolumn=120
 set nobackup
 set nowritebackup
 set mouse=
-
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -101,8 +100,8 @@ EOF
 
 let g:material_style = "deep ocean"
 
-" colorscheme onedark
-colorscheme gruvbox
+colorscheme onedark
+hi CursorLine guibg=#333333
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -155,6 +154,8 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
+autocmd FileType go autocmd BufWritePre <buffer> call CocAction('format')
+
 augroup mygroup
 	autocmd!
 	" Setup formatexpr specified filetype(s).
@@ -162,6 +163,8 @@ augroup mygroup
 	" Update signature help on jump placeholder.
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
@@ -275,7 +278,7 @@ nmap gD :CocDiagnostics<cr>
 lua vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", {noremap = true})
 
 lua require('workspaces').setup({
-			\ hooks = { open = { "NERDTree" } }, 
+			\ hooks = { open = { "NERDTree" } },
 			\ global_cd = true 
 			\ })
 
@@ -340,6 +343,7 @@ map <leader>zh :HFiles<CR>
 let g:go_doc_keywordprg_enabled = 0
 nmap <silent> K :call CocActionAsync('doHover')<CR>
 map <leader>dt :CocCommand docthis.documentThis<CR>
+nmap <silent> <Leader>fc :call CocAction('format')<CR>
 
 lua require("transparent").setup({ enable = true })
 
