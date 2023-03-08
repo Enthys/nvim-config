@@ -32,7 +32,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Plug 'nsf/gocode', { 'tag': 'v.20150302', 'rtp': 'vim' }
-Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -69,8 +69,9 @@ call plug#end()
 " ---------------------------------------------------------------
 " ---------------------------------------------------------------
 " ---------------------------------------------------------------
-lua require('nvim-autopairs').setup({})
-lua require('nightfox').setup({
+lua << EOF
+require('nvim-autopairs').setup({})
+require('nightfox').setup({
 			\ options = {
 			\ styles = {
 			\ comments = "italic"
@@ -78,9 +79,9 @@ lua require('nightfox').setup({
 			\ }
 			\ })
 
-lua require('onedark').load({})
+require('onedark').load({})
 
-lua require('material').setup({
+require('material').setup({
 			\ contrast = {
 			\ terminal = true,
 			\ sidebars = true,
@@ -89,9 +90,19 @@ lua require('material').setup({
 			\ non_current_windows = true,
 			\ }
 			\ })
+
+require('telescope').setup{ 
+	defaults = { 
+		file_ignore_patterns = { "node%_modules/.*", "package%-lock%.json", "vendor", "dist", ".git" }
+	}
+}
+require('telescope').load_extension("file_browser")
+EOF
+
 let g:material_style = "deep ocean"
 
-colorscheme onedark
+" colorscheme onedark
+colorscheme gruvbox
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -256,9 +267,6 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-lua require('telescope').setup{ defaults = { file_ignore_patterns = { "node_modules", "vendor", "dist", ".git" }} }
-lua require('telescope').load_extension("file_browser")
-
 " nmap <leader>tt :NvimTreeToggle<cr>
 let NERDTreeShowHidden=1
 nmap <leader>tt :NERDTreeToggle<cr>
@@ -347,3 +355,5 @@ vnoremap <leader>p "_dP
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+command! BufOnly execute '%bd|edit #|bd#'
