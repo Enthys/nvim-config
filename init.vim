@@ -52,43 +52,15 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'natecraddock/workspaces.nvim'
-Plug 'marko-cerovac/material.nvim'
-Plug 'EdenEast/nightfox.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug 'xiyaowong/nvim-transparent'
 Plug 'windwp/nvim-autopairs'
 call plug#end()
 
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
-" ---------------------------------------------------------------
 lua << EOF
 require('nvim-autopairs').setup({})
-require('nightfox').setup({
-			\ options = {
-			\ styles = {
-			\ comments = "italic"
-			\ }
-			\ }
-			\ })
 
 require('onedark').load({})
-
-require('material').setup({
-			\ contrast = {
-			\ terminal = true,
-			\ sidebars = true,
-			\ floating_windows = true,
-			\ cursor_line = true,
-			\ non_current_windows = true,
-			\ }
-			\ })
 
 require('telescope').setup{ 
 	defaults = { 
@@ -98,10 +70,10 @@ require('telescope').setup{
 require('telescope').load_extension("file_browser")
 EOF
 
-let g:material_style = "deep ocean"
 
 colorscheme onedark
 hi CursorLine guibg=#333333
+hi Comment guifg=#00ff00
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -134,7 +106,6 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gs :sp<CR><Plug>(coc-definition)<c-w>j
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -144,13 +115,10 @@ nmap <silent> [B :bp<CR>
 nmap <silent> ]B :bn<CR>
 
 
-" Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
@@ -304,7 +272,6 @@ let g:go_mod_fmt_autosave = 1
 let g:go_gopls_enabled = 1
 let g:go_doc_balloon = 1
 
-highlight Comment guifg=#00ff00
 
 
 command! -bang -nargs=? -complete=dir HFiles
@@ -345,7 +312,7 @@ nmap <silent> K :call CocActionAsync('doHover')<CR>
 map <leader>dt :CocCommand docthis.documentThis<CR>
 nmap <silent> <Leader>fc :call CocAction('format')<CR>
 
-lua require("transparent").setup({ enable = true })
+lua require("transparent").setup({})
 
 " delete without yanking
 nnoremap <leader>d "_d

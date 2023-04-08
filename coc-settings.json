@@ -6,12 +6,6 @@
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.showUnused": true,
   "typescript.showDeprecated": true,
-  "go.goplsOptions": {
-	  "gofumpt": true,
-	  "env": {
-		  "GOFLAGS": "--tags=\"test,unit,e2e,it\""
-	  }
-  },
   "cSpell.userWords": [
     "Asen",
     "Certbot",
@@ -34,8 +28,10 @@
     "dtos",
     "epub",
     "eqeqeq",
+    "fatih",
     "fenix",
     "fenixmq",
+    "golevelup",
     "gonic",
     "gorm",
     "healthcheck",
@@ -45,26 +41,19 @@
     "mitev",
     "nestjs",
     "noout",
+    "paramtypes",
     "prebuild",
+    "prefetch",
+    "publishings",
     "rabbitmq",
     "recard",
     "rrsets",
     "streadway",
+    "structs",
     "timestamptz",
     "typeorm",
     "varchar",
     "wbst"
   ],
   "snippets.ultisnips.pythonPrompt": false,
-  "languageserver": {
-	  "golang": {
-		  "command": "gopls",
-		  "rootPatterns": ["go.mod", ".git/"],
-		  "disableWorkspaceFolders": true,
-		  "filetypes": ["go"],
-		  "initializationOptions": {
-			  "completeUnimported": true
-		  },
-	  }
-  },
 }
