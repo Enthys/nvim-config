@@ -297,6 +297,18 @@ command! -bang -nargs=? -complete=dir HFiles
 
 map <leader>zh :HFiles<CR>
 
+function! CocExtInstall()
+	:CocInstall coc-spell-checker
+		\ coc-highlight
+		\ coc-eslint
+		\ coc-go
+		\ coc-tsserver
+		\ coc-snippets
+		\ coc-json
+		\ coc-docker
+endfunction!
+
+
 " Use K to show documentation in preview window.
 " nnoremap <silent> K :call ShowDocumentation()<CR>
 " 
