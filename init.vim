@@ -15,7 +15,6 @@ set colorcolumn=120
 set nobackup
 set nowritebackup
 set mouse=
-
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
@@ -57,26 +56,23 @@ Plug 'xiyaowong/nvim-transparent'
 Plug 'windwp/nvim-autopairs'
 call plug#end()
 
-lua << EOF
-require('nvim-autopairs').setup({})
+lua require('nvim-autopairs').setup({})
 
-require('onedark').load({})
+lua require('onedark').load({})
 
-require('telescope').setup{ 
-	defaults = { 
-		file_ignore_patterns = { "node%_modules/.*", "package%-lock%.json", "vendor", "dist", ".git" }
-	}
-}
-require('telescope').load_extension("file_browser")
-EOF
-
+lua require('telescope').setup{
+	\ defaults = {
+		\ file_ignore_patterns = { "node%_modules/.*", "package%-lock%.json", "vendor", "dist", ".git" }
+	\}
+\}
+lua require('telescope').load_extension("file_browser")
 
 colorscheme onedark
 hi CursorLine guibg=#333333
 hi Comment guifg=#00ff00
 
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" NOTE: Use command `:verbose imap <tab>` to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
 			\ coc#pum#visible() ? coc#pum#next(1):
@@ -95,14 +91,15 @@ function! CheckBackspace() abort
 endfunction
 
 " Use <c-space> to trigger completion.
+
 if has('nvim')
 	inoremap <silent><expr> <c-space> coc#refresh()
 else
 	inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -113,7 +110,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [B :bp<CR>
 nmap <silent> ]B :bn<CR>
-
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -128,6 +124,7 @@ augroup mygroup
 	autocmd!
 	" Setup formatexpr specified filetype(s).
 	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+
 	" Update signature help on jump placeholder.
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -136,6 +133,7 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
+
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
@@ -173,7 +171,7 @@ endif
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
-" Add `:Format` command to format current buffer.
+" Add ':Format' command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
@@ -181,7 +179,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
 command! -nargs=0 W :w
 
 " Add (Neo)Vim's native statusline support.
@@ -195,12 +192,14 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
+" 
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
+" 
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
