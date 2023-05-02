@@ -54,6 +54,7 @@ Plug 'natecraddock/workspaces.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug 'xiyaowong/nvim-transparent'
 Plug 'windwp/nvim-autopairs'
+Plug 'terrortylor/nvim-comment'
 call plug#end()
 
 lua require('nvim-autopairs').setup({})
@@ -66,6 +67,8 @@ lua require('telescope').setup{
 	\}
 \}
 lua require('telescope').load_extension("file_browser")
+
+lua require('nvim_comment').setup()
 
 colorscheme onedark
 hi CursorLine guibg=#333333
@@ -110,6 +113,9 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [B :bp<CR>
 nmap <silent> ]B :bn<CR>
+nmap <silent> [b :bp<CR>
+nmap <silent> ]b :bn<CR>
+imap <silent> <C-c> <Esc>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -286,7 +292,7 @@ let @x = '0xxx'
 
 " NERDTree Configuration
 " autocmd VimEnter * NERDTree | wincmd p
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 command! -bang -nargs=? -complete=dir HFiles
 			\ call fzf#vim#files(<q-args>, {'source': 'find . \( -not -path "./.git/*" ' .
