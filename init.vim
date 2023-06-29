@@ -55,8 +55,12 @@ Plug 'navarasu/onedark.nvim'
 Plug 'xiyaowong/nvim-transparent'
 Plug 'windwp/nvim-autopairs'
 Plug 'terrortylor/nvim-comment'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'MunifTanjim/nui.nvim'
+Plug 'vuki656/package-info.nvim'
 call plug#end()
 
+lua require('package-info').setup()
 lua require('nvim-autopairs').setup({})
 
 lua require('onedark').load({})
@@ -116,6 +120,8 @@ nmap <silent> ]B :bn<CR>
 nmap <silent> [b :bp<CR>
 nmap <silent> ]b :bn<CR>
 imap <silent> <C-c> <Esc>
+nmap <silent> <Tab> :bn<CR>
+nmap <silent> <S-Tab> :bp<CR>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -345,3 +351,18 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 command! BufOnly execute '%bd|edit #|bd#'
+
+
+lua vim.api.nvim_set_keymap(
+			\ "n",
+			\ "<leader>nd",
+			\ "<cmd>lua require('package-info').delete()<cr>",
+			\ { silent = true, noremap = true }
+			\)
+
+lua vim.api.nvim_set_keymap(
+			\    "n",
+			\    "<leader>np",
+			\    "<cmd>lua require('package-info').change_version()<cr>",
+			\    { silent = true, noremap = true }
+			\)
