@@ -58,6 +58,7 @@ Plug 'terrortylor/nvim-comment'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'vuki656/package-info.nvim'
+Plug 'github/copilot.vim'
 call plug#end()
 
 lua require('package-info').setup()
@@ -65,12 +66,21 @@ lua require('nvim-autopairs').setup({})
 
 lua require('onedark').load({})
 
+lua require('workspaces').setup({
+			\ hooks = { open = { "Explore" } },
+			\ global_cd = true,
+			\ })
+
 lua require('telescope').setup{
-	\ defaults = {
-		\ file_ignore_patterns = { "node%_modules/.*", "package%-lock%.json", "vendor", "dist", ".git" }
-	\}
-\}
+			\ defaults = {
+			\ file_ignore_patterns = { "node%_modules/.*", "package%-lock%.json", "vendor", "dist", ".git", "topics", "lib", "tmp" }
+			\},
+			\ extensions = {
+			\ keep_insert = true,
+			\ }
+			\}
 lua require('telescope').load_extension("file_browser")
+lua require('telescope').load_extension("workspaces")
 
 lua require('nvim_comment').setup()
 
@@ -119,9 +129,6 @@ nmap <silent> [B :bp<CR>
 nmap <silent> ]B :bn<CR>
 nmap <silent> [b :bp<CR>
 nmap <silent> ]b :bn<CR>
-imap <silent> <C-c> <Esc>
-nmap <silent> <Tab> :bn<CR>
-nmap <silent> <S-Tab> :bp<CR>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
@@ -197,36 +204,31 @@ command! -nargs=0 W :w
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:airline_section_b='%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-" 
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+"
+" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-" 
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+"
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 autocmd FileType markdown setlocal shiftwidth=2 expandtab
 
 let g:vim_markdown_folding_disabled = 1
-
-nmap <silent> <C-t>n :TestNearest<CR>
-nmap <silent> <C-t>f :TestFile<CR>
-nmap <silent> <C-t>a :TestSuite<CR>
-nmap <silent> <C-t>l :TestLast<CR>
-nmap <silent> <C-t>v :TestVisit<CR>
 
 let g:airline#extensions#tabline#enabled = 1
 
@@ -243,23 +245,19 @@ if (empty($TMUX))
 	endif
 endif
 
-
 nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" nmap <leader>tt :NvimTreeToggle<cr>
 let NERDTreeShowHidden=1
 nmap <leader>tt :NERDTreeToggle<cr>
+nmap <leader>tf :NERDTreeFind<cr>
+" nmap <leader>tt :e .<cr>
+nmap <leader>op <cmd>Telescope workspaces<cr>
 nmap gD :CocDiagnostics<cr>
 
 lua vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", {noremap = true})
-
-lua require('workspaces').setup({
-			\ hooks = { open = { "NERDTree" } },
-			\ global_cd = true 
-			\ })
 
 nmap <leader>gb :BlamerToggle<cr>
 let g:blamer_delay = 100
@@ -278,12 +276,10 @@ let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 let g:go_auto_type_info =1
-let g:go_fmt_autosave = 1
-let g:go_mod_fmt_autosave = 1
+let g:go_fmt_autosave = 0
+let g:go_mod_fmt_autosave = 0
 let g:go_gopls_enabled = 1
 let g:go_doc_balloon = 1
-
-
 
 command! -bang -nargs=? -complete=dir HFiles
 			\ call fzf#vim#files(<q-args>, {'source': 'find . \( -not -path "./.git/*" ' .
@@ -306,23 +302,23 @@ command! -bang -nargs=? -complete=dir HFiles
 			\   '-and \( -type f -or -type l \) ' .
 			\ '\) -print | sed "s:^..::"'}, <bang>0)
 
-map <leader>zh :HFiles<CR>
-
 function! CocExtInstall()
 	:CocInstall coc-spell-checker
-		\ coc-highlight
-		\ coc-eslint
-		\ coc-go
-		\ coc-tsserver
-		\ coc-snippets
-		\ coc-json
-		\ coc-docker
+				\ coc-highlight
+				\ coc-eslint
+				\ coc-go
+				\ coc-tsserver
+				\ coc-html
+				\ coc-snippets
+				\ coc-json
+				\ coc-yaml
+				\ coc-docker
 endfunction!
 
 
 " Use K to show documentation in preview window.
 " nnoremap <silent> K :call ShowDocumentation()<CR>
-" 
+"
 " function! ShowDocumentation()
 "   if CocAction('hasProvider', 'hover')
 "     call CocActionAsync('doHover')
@@ -330,10 +326,9 @@ endfunction!
 "     call feedkeys('K', 'in')
 "   endif
 " endfunction
+
 let g:go_doc_keywordprg_enabled = 0
 nmap <silent> K :call CocActionAsync('doHover')<CR>
-map <leader>dt :CocCommand docthis.documentThis<CR>
-nmap <silent> <Leader>fc :call CocAction('format')<CR>
 
 lua require("transparent").setup({})
 
@@ -341,9 +336,10 @@ lua require("transparent").setup({})
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
-" replace currently selected text with default register
-" without yanking it
+" replace currently selected text with default register without yanking it
 vnoremap <leader>p "_dP
+
+nmap <silent><C-M-O> <C-o>:bd#<CR>
 
 " Snippet Configuration
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -352,6 +348,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 command! BufOnly execute '%bd|edit #|bd#'
 
+map <leader>bo mU:BufOnly<CR>'U
 
 lua vim.api.nvim_set_keymap(
 			\ "n",
@@ -366,3 +363,7 @@ lua vim.api.nvim_set_keymap(
 			\    "<cmd>lua require('package-info').change_version()<cr>",
 			\    { silent = true, noremap = true }
 			\)
+
+exe "let g:WorkspaceFolders=['".getcwd()."']"
+
+imap <silent> <C-c> <Esc>

@@ -1,0 +1,20 @@
+snippet muxhandler "Create a Mux handler"
+	func ${1:HandlerName}(w http.ResponseWriter, r *http.Request) {
+		${0}
+	}
+snippet struct "Create a struct"
+	type ${1:StructName} {
+		
+	}
+snippet struct_m "Create a struct method"
+	func (${1:s} ${2:*Struct}) ${3:Method}(${4:arguments}) ${5:return_types} {
+		${0}
+	}
+snippet ctest "Create a top-level test" 
+	func Test${1:Target}(t *testing.T) {
+		${0}
+	}
+snippet ctestt "Create a sub test"
+	t.Run("${1:description}", func(t *testing.T) {
+		${0}
+	})
