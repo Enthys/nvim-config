@@ -297,7 +297,7 @@ let @x = '0xxx'
 " autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | bd | endif
 " END: ------------------------------
 
 
@@ -372,3 +372,8 @@ lua vim.api.nvim_set_keymap(
 exe "let g:WorkspaceFolders=['".getcwd()."']"
 
 imap <silent> <C-c> <Esc>
+
+" Start: Copilot
+nnoremap <leader>cpe :Copilot enable<CR>
+nnoremap <leader>cpd :Copilot disable<CR>
+" End: Copilot
