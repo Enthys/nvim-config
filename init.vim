@@ -49,6 +49,7 @@ Plug 'mhinz/vim-signify'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'natecraddock/workspaces.nvim'
 Plug 'navarasu/onedark.nvim'
@@ -81,6 +82,7 @@ lua require('telescope').setup{
 			\}
 lua require('telescope').load_extension("file_browser")
 lua require('telescope').load_extension("workspaces")
+lua require('telescope').load_extension("project")
 
 lua require('nvim_comment').setup()
 
