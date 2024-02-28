@@ -59,7 +59,7 @@ Plug 'terrortylor/nvim-comment'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'vuki656/package-info.nvim'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 call plug#end()
 
 lua require('package-info').setup()
