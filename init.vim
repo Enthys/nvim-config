@@ -74,11 +74,12 @@ lua require('workspaces').setup({
 
 lua require('telescope').setup{
 			\ defaults = {
-			\ file_ignore_patterns = { "node%_modules/.*", "package%-lock%.json", "vendor", "dist", ".git", "topics", "lib", "tmp" }
+			\ file_ignore_patterns = { "node%_modules/.*", "package%-lock%.json", "vendor", "dist", ".git/.*", "topics", "lib", "tmp" }
 			\},
 			\ extensions = {
 			\ keep_insert = true,
-			\ }
+			\ },
+			\ pickers = { find_files = { hidden = true } }
 			\}
 lua require('telescope').load_extension("file_browser")
 lua require('telescope').load_extension("workspaces")
